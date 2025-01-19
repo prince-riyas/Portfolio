@@ -1,0 +1,53 @@
+/* General Styles */
+.portfolio {
+  position: relative; /* Ensure the particle background is behind the content */
+  padding: 2rem;
+  text-align: center;
+  background: transparent; /* Make background transparent */
+  min-height: 100vh;
+  color: #ffffff; /* White text for contrast */
+  font-family: 'Poppins', sans-serif; /* Sleek font */
+  z-index: 1; /* Ensure content is above the particle background */
+}
+
+.portfolio-title {
+  font-size: 3rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Projects Grid */
+.projects {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+/* Project Card */
+.project {
+  width: 80%;
+  max-width: 800px;
+  padding: 1.5rem;
+  text-align: center;
+  cursor: pointer;
+}
+
+/* Project Title */
+.project-title {
+  font-size: 2.5rem;
+  font-weight: 500;
+  color: #ffffff;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+/* Hover Effects */
+.project:hover .project-title {
+  text-decoration: none;
+  filter: grayscale(100%);
+  transform: scale(1.1);
+}

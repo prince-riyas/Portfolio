@@ -1,0 +1,42 @@
+.page-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* Ensure it expands to fill the available space */
+  padding: 1rem; /* Add some padding to the container */
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Fixed 3 columns */
+  gap: 8px; /* Reduce the gap for a tighter layout */
+  width: 100%;
+  max-width: 1200px; /* Limit the maximum width of the gallery */
+  margin: 0 auto; /* Center the gallery */
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1 / 1; /* Ensures the images are square */
+  border-radius: 4px; /* Slightly rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-item:hover {
+  transform: scale(1.05); /* Slight zoom on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+.gallery-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(100%); /* Convert images to black and white */
+  transition: filter 0.3s ease, opacity 0.5s ease; /* Smooth transition for hover effect */
+}
+
+.gallery-item:hover .gallery-image {
+  filter: grayscale(0%); /* Revert to full color on hover (optional) */
+}

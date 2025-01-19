@@ -1,0 +1,137 @@
+import React, { useState } from 'react';
+import Particles from 'react-tsparticles';
+import { loadFull } from 'tsparticles'; // Import loadFull from tsparticles
+import { motion } from 'framer-motion';
+import ModalImage from 'react-modal-image'; // Import the lightbox component
+import './Home.css';
+
+const Home = () => {
+  const importAll = (r) => r.keys().map(r);
+  const imageContext = require.context('../../assets/images/', false, /\.(jpg|jpeg|png|gif)$/);
+  const images = importAll(imageContext);
+
+  // Initialize particles
+  const particlesInit = async (main) => {
+    await loadFull(main);
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }} // Initial state (hidden)
+      animate={{ opacity: 1 }} // Animate to fully visible
+      exit={{ opacity: 0 }} // Exit animation (fade out)
+      transition={{ duration: 0.5 }} // Transition duration
+    >
+      <div className="home">
+        {/* Particle Background */}
+        <Particles
+          id="tsparticles"
+          init={particlesInit}
+          options={{
+            background: {
+              color: {
+                value: '#121212', // Dark background
+              },
+            },
+            fpsLimit: 60, // Frame rate limit
+            interactivity: {
+              events: {
+                onClick: {
+                  enable: true, // Enable click interaction
+                  mode: 'push', // Add particles on click
+                },
+                onHover: {
+                  enable: true, // Enable hover interaction
+                  mode: 'repulse', // Repel particles on hover
+                },
+              },
+              modes: {
+                push: {
+                  quantity: 4, // Number of particles to add on click
+                },
+                repulse: {
+                  distance: 200, // Distance to repel particles
+                  duration: 0.4, // Duration of the repulsion effect
+                },
+              },
+            },
+            particles: {
+              color: {
+                value: '#61dafb', // Particle color (accent color)
+              },
+              links: {
+                color: '#61dafb', // Link color between particles
+                distance: 150, // Maximum distance between linked particles
+                enable: true, // Enable links between particles
+                opacity: 0.5, // Link opacity
+                width: 1, // Link width
+              },
+              collisions: {
+                enable: true, // Enable particle collisions
+              },
+              move: {
+                direction: 'none', // Random movement direction
+                enable: true, // Enable particle movement
+                outModes: {
+                  default: 'bounce', // Particles bounce off the edges
+                },
+                random: false, // Disable random movement
+                speed: 2, // Movement speed
+                straight: false, // Disable straight-line movement
+              },
+              number: {
+                density: {
+                  enable: true, // Enable density-based particle distribution
+                  area: 800, // Area for density calculation
+                },
+                value: 80, // Total number of particles
+              },
+              opacity: {
+                value: 0.5, // Particle opacity
+              },
+              shape: {
+                type: 'circle', // Particle shape
+              },
+              size: {
+                value: { min: 1, max: 5 }, // Particle size range
+              },
+            },
+            detectRetina: true, // Optimize for retina displays
+          }}
+        />
+
+        {/* Welcome Heading */}
+        <motion.h1
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+        >
+          Welcome to My Portfolio
+        </motion.h1>
+
+        {/* Image Gallery */}
+        <div className="gallery">
+          {images.map((image, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: index * 0.2 }}
+              whileHover={{ scale: 1.1 }}
+            >
+              <ModalImage
+                small={image} // Thumbnail image
+                large={image} // Full-size image for the lightbox
+                alt={`Aesthetic Pic ${index + 1}`}
+                hideDownload={true} // Hide the download button
+                hideZoom={true} // Hide the zoom button
+              />
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+export default Home;
